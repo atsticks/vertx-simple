@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>gh.atsticks.demos</groupId>
+    <artifactId>vertx01</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+        <packaging>jar</packaging>
+
+        <name>Simplest Vertx App</name>
+
+        <properties>
+
+            <vertx.version>3.4.1</vertx.version>
+            <vertx.verticle>gh.atsticks.demos.vertx01.VertxSimpleReplier</vertx.verticle>
+            <vertx-maven-plugin.version>1.0.7</vertx-maven-plugin.version>
+
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+            <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+
+            <fabric8.maven.plugin.version>3.4.0</fabric8.maven.plugin.version>
+            <fabric8.mode>openshift</fabric8.mode>
+
+            <!-- fabric8 version -->
+            <fabric8.version>2.2.183</fabric8.version>
+            <fabric8.k8s-client.version>2.2.13</fabric8.k8s-client.version>
+            <version.exec.plugin.version>1.4.0</version.exec.plugin.version>
+        </properties>
+
+        <licenses>
+            <license>
+                <name>The Apache Software License, Version 2.0</name>
+                <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+                <distribution>repo</distribution>
+            </license>
+        </licenses>
+        <developers>
+            <developer>
+                <id>atsticks</id>
+                <name>Anatole Tresch</name>
+                <email>atsticks@gmail.com</email>
+            </developer>
+        </developers>
+
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>vertx-maven-plugin</artifactId>
+                    <version>${vertx-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>vmp</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>initialize</goal>
+                                <goal>package</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+            </plugins>
+        </build>
+
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>io.vertx</groupId>
+                    <artifactId>vertx-dependencies</artifactId>
+                    <version>${vertx.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+                <dependency>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-project-bom-with-platform-deps</artifactId>
+                <version>${fabric8.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+                </dependency>
+            </dependencies>
+        </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    </project>
