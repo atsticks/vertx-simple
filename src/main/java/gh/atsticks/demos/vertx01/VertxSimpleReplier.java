@@ -13,6 +13,7 @@ public class VertxSimpleReplier extends AbstractVerticle{
     public void start() throws Exception {
         super.start();
         vertx.createHttpServer().requestHandler(req -> {
+            req.response().setChunked(true);
             req.response().write("Thread: " + Thread.currentThread().getName())
             .write("\nVerticle: " + super.hashCode())
             .write("\nInstance: " + System.getenv("HOSTNAME")).end();})
